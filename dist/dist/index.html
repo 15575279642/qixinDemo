@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang=en><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><link rel=icon href=favicon.ico><title>琪心（广州）科技有限公司</title><link href=css/chunk-002ddf16.b599fb51.css rel=prefetch><link href=css/chunk-34382e7e.ea116a58.css rel=prefetch><link href=css/chunk-3480446c.ceab6ba3.css rel=prefetch><link href=css/chunk-7e19b889.1b8d02fa.css rel=prefetch><link href=css/chunk-c69e0c20.fa428f40.css rel=prefetch><link href=js/chunk-002ddf16.aa7288f6.js rel=prefetch><link href=js/chunk-2d0c4324.c887e427.js rel=prefetch><link href=js/chunk-2d0c5589.1c1c542c.js rel=prefetch><link href=js/chunk-2d0da069.af6775b1.js rel=prefetch><link href=js/chunk-2d21e796.b5b919fa.js rel=prefetch><link href=js/chunk-34382e7e.ab3dd1b0.js rel=prefetch><link href=js/chunk-3480446c.9bef78ca.js rel=prefetch><link href=js/chunk-7e19b889.c4a6bdbf.js rel=prefetch><link href=js/chunk-832e8ea6.0ab45c3d.js rel=prefetch><link href=js/chunk-c69e0c20.b43558a2.js rel=prefetch><link href=css/app.2b618c1e.css rel=preload as=style><link href=css/chunk-vendors.25a15b43.css rel=preload as=style><link href=js/app.b2896aef.js rel=preload as=script><link href=js/chunk-vendors.604a2890.js rel=preload as=script><link href=css/chunk-vendors.25a15b43.css rel=stylesheet><link href=css/app.2b618c1e.css rel=stylesheet></head><body><div id=app></div><script src=js/chunk-vendors.604a2890.js></script><script src=js/app.b2896aef.js></script></body><script src="http://api.map.baidu.com/api?v=1.5&ak=CqSmd95LZGbKrsshOnjTNUB3"></script><script>var map = new BMap.Map("Mapcontainer"); //设置底图
+ 	map.enableScrollWheelZoom(); //启用滚轮放大缩小，默认禁用
+ 	map.enableContinuousZoom(); //启用地图惯性拖拽，默认禁用
+ 	var localSearch = new BMap.LocalSearch(map);
+ 	localSearch.enableAutoViewport(); //允许自动调节窗体大小
+ 	function searchByStationName() {
+ 		map.clearOverlays(); //清空原来的标注
+ 		var address = "广州传媒维动大厦"; //查询的详细地址
+ 		localSearch.setSearchCompleteCallback(function(searchResult) {
+ 			var poi = searchResult.getPoi(0);
+ 			console.log()
+ 			var lng = poi.point.lng;
+ 			var lat = poi.point.lat;
+ 			var point = new BMap.Point(lng, lat);
+ 			var marker = new BMap.Marker(point);
+ 			var label = new BMap.Label(address, {
+ 				"offset": new BMap.Size(20, -20)
+ 			});
+ 			var infoWindow = new BMap.InfoWindow(address);
+ 			map.enableScrollWheelZoom();
+ 			map.centerAndZoom(point, 15);
+ 			marker.setLabel(label);
+ 			marker.addEventListener("click", function() {
+ 				this.openInfoWindow(infoWindow);
+ 			});
+ 			map.addOverlay(marker);
+ 			map.addControl(new BMap.NavigationControl());
+ 			map.addControl(new BMap.ScaleControl());
+ 			map.addControl(new BMap.OverviewMapControl());
+			
+			// setTimeout(function(){
+			// 	map.panTo(new BMap.Point(lng, lat));	
+			// },100)
+	
+ 			marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+ 		});
+ 		localSearch.search(address);
+ 	}
+ 	searchByStationName();</script></html>
