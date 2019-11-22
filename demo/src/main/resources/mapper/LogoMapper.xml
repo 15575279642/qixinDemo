@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.LogoDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.demo.entities.Logo">
+        <id column="id" property="id"></id>
+        <result column="logo_tilte" property="logoTilte"></result>
+        <result column="content" property="content"></result>
+        <result column="logo_image" property="logoImage"></result>
+        <collection property="logoImages" ofType="com.demo.entities.LogoImage">
+            <id column="l_id" property="id" />
+            <result column="image" property="image" />
+            <result column="tilte" property="tilte" />
+            <result column="logo_id" property="logoId" />
+        </collection>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, logo_tilte, content, logo_image
+    </sql>
+
+    <select id="selectImages" resultMap="BaseResultMap" parameterType="com.demo.entities.Logo">
+         select * from logo l left OUTER join logo_image li on l.id=li.logo_id
+    </select>
+
+   <!-- <resultMap id="BaseResultMap" type="com.demo.entities.Logo">
+        <id column="id" property="id"></id>
+        <result column="logo_tilte" property="logoTilte"></result>
+        <result column="content" property="content"></result>
+        <collection property="logoImages" select="test2" ofType="com.demo.entities.LogoImage" column="id">
+            <id column="logo_id" property="id" />
+            <result column="image" property="image" />
+            <result column="tilte" property="tilte" />
+            <result column="logo_id" property="logoId" />
+        </collection>
+    </resultMap>
+
+    <select id="test" resultMap="BaseResultMap" >
+        select * from logo
+    </select>
+
+    <select id="test2" resultType="com.demo.entities.LogoImage" parameterType="int">
+        select * from logo_image where logo_id=#{id}
+    </select>-->
+</mapper>

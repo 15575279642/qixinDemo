@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.DetailDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.demo.entities.Detail">
+        <id column="id" property="id" />
+        <result column="d_title" property="dTitle" />
+        <result column="description" property="description" />
+        <result column="pic_url" property="picUrl" />
+        <result column="function_list" property="functionList" />
+        <result column="example_id" property="exampleId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, d_title, description, pic_url, function_list, example_id
+    </sql>
+
+</mapper>
